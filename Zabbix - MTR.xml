@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2020-11-02T11:52:39Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Zabbix - MTR</template>
+            <name>Zabbix - MTR</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>ICMP</name>
+                </application>
+                <application>
+                    <name>MTR</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Hop Count</name>
+                    <type>EXTERNAL</type>
+                    <key>hopcount.sh[&quot;{HOST.CONN}&quot;]</key>
+                    <delay>30m</delay>
+                    <status>DISABLED</status>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>ICMP</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <name>MTR Trace</name>
+                    <type>EXTERNAL</type>
+                    <key>mtr.py[{HOST.CONN}]</key>
+                    <delay>1h</delay>
+                    <trends>0</trends>
+                    <status>DISABLED</status>
+                    <value_type>TEXT</value_type>
+                    <applications>
+                        <application>
+                            <name>MTR</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>Hop Count</name>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Zabbix - MTR</host>
+                        <key>hopcount.sh[&quot;{HOST.CONN}&quot;]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
