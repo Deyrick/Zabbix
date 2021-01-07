@@ -8,7 +8,7 @@
 
 
 ## Template Status
-0.Features
-1.Imcp Check;
-2.Snmp Check;
+0.Features.
+1.Imcp Check.
+2.Snmp Check.
 3.Uptime.
