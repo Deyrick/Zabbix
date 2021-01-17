@@ -33,3 +33,21 @@
 13. Mac.
 14. Airmax.
 15. Interference.
+
+
+## Template Unifi
+
+
+1.  Memory.
+2.  Cpu.
+3.  Uptime.
+4.  Firmware.
+5.  Hardware Model.
+6.  Icmp.
+7.  Traffic In/OuT.
+8.  SSID 2.4Ghz.
+9.  SSID 2.5Ghz.
+10. Cliente Station.
+11. Mac.
+12. lan Status.
+13. LLD Wifi Networks.
