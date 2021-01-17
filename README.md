@@ -9,7 +9,27 @@
 
 ## Template Status
 
-0. Features.
+
 1. Imcp Check.
 2. Snmp Check.
 3. Uptime.
+
+
+## Template Ubiquiti
+
+
+1.  Memory.
+2.  Cpu.
+3.  Uptime.
+4.  Firmware.
+5.  Hardware Model.
+6.  Icmp.
+7.  Traffic In/OuT.
+8.  Radio Chanel.
+9.  CCQ.
+10. Cliente Station.
+11. Lan Negociation.
+12. Tx/Rx.
+13. Mac.
+14. Airmax.
+15. Interference.
