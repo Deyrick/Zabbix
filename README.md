@@ -1,4 +1,4 @@
-## Zabbix
+## Zabbix External Script
 
 1. Copy the script file mtr.sh to the ExternalScripts folder on your Zabbix Server or Proxy.
 2. Make the script executable: chmod +x mtr.py
