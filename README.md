@@ -69,7 +69,9 @@
 
 For the model to work, you need to add the script "LLD.py" 
 in
-/usr/lib/zabbix/externalscripts/
+"/usr/lib/zabbix/externalscripts/"
+and
+"Valuemaps"
 
 
 
