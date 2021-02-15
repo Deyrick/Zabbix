@@ -51,3 +51,28 @@
 11. Mac.
 12. lan Status.
 13. LLD Wifi Networks.
+
+
+## Template Juniper BGP
+
+1.	Accepted receiving prefixes
+2. 	Active receiving prefixes
+3. 	Administrative status
+4. 	All advertising prefixes
+5. 	All receiving prefixes 
+6.  Established time
+7. 	Last recieved error
+8.  Last sent error
+9.  Operational status
+10. Rejected receiving prefixes
+11. Remote AS for peer
+
+For the model to work, you need to add the script "LLD.py" 
+in
+/usr/lib/zabbix/externalscripts/
+
+
+
+
+
+
