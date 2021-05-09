@@ -67,11 +67,7 @@
 10. Rejected receiving prefixes
 11. Remote AS for peer
 
-For the model to work, you need to add the script "LLD.py" 
-in
-"/usr/lib/zabbix/externalscripts/"
-
-Add "Valuemaps" on zabbix.
+Add "Valuemaps" on zabbix
 
 
 
