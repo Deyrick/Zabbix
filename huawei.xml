@@ -1,0 +1,1080 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2021-09-12T19:36:52Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>SinalBR - Huawei</template>
+            <name>SinalBR - Huawei</name>
+            <description>By Deyrick J. Santos</description>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>CPU</name>
+                </application>
+                <application>
+                    <name>General</name>
+                </application>
+                <application>
+                    <name>Memory</name>
+                </application>
+                <application>
+                    <name>Mpls Tunel</name>
+                </application>
+                <application>
+                    <name>Network</name>
+                </application>
+                <application>
+                    <name>SNMP</name>
+                </application>
+                <application>
+                    <name>Status</name>
+                </application>
+                <application>
+                    <name>System Inventory</name>
+                </application>
+                <application>
+                    <name>Temperatura</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Cpu Usage</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.1.1.5.67108873</snmp_oid>
+                    <key>cpu.usage</key>
+                    <delay>60</delay>
+                    <units>%</units>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Used Memory</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.1.1.7.67108873</snmp_oid>
+                    <key>memory.usage</key>
+                    <history>30d</history>
+                    <units>%</units>
+                    <applications>
+                        <application>
+                            <name>Memory</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <name>Inventory</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>SNMPv2-MIB::sysDescr.0</snmp_oid>
+                    <key>SwsystemInventory</key>
+                    <delay>1d</delay>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <inventory_link>SOFTWARE_FULL</inventory_link>
+                    <applications>
+                        <application>
+                            <name>System Inventory</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>SNMP Contact</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.2.1.1.4.0</snmp_oid>
+                    <key>sysContact</key>
+                    <delay>1h</delay>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <inventory_link>CONTACT</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMP</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <name>SNMP Location</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.2.1.1.6.0</snmp_oid>
+                    <key>sysLocation</key>
+                    <delay>1h</delay>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <inventory_link>LOCATION</inventory_link>
+                    <applications>
+                        <application>
+                            <name>SNMP</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <name>Hostname</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>1.3.6.1.2.1.1.5.0</snmp_oid>
+                    <key>sysName</key>
+                    <delay>1d</delay>
+                    <history>30d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Coleta Informação do hostname do dispositivo</description>
+                    <inventory_link>NAME</inventory_link>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                        <application>
+                            <name>SNMP</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <name>Uptime</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>SNMPv2-MIB::sysUpTime.0</snmp_oid>
+                    <key>sysUpTime</key>
+                    <history>30d</history>
+                    <units>uptime</units>
+                    <applications>
+                        <application>
+                            <name>General</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>MULTIPLIER</type>
+                            <params>0.01</params>
+                        </step>
+                    </preprocessing>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}&lt;600</expression>
+                            <name>{HOST.NAME} - {HOST.IP} was restarted</name>
+                            <status>DISABLED</status>
+                            <priority>INFO</priority>
+                            <description>Roteador foi reiniciado</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>temperatura</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>.1.3.6.1.4.1.2011.5.25.31.1.1.1.1.11.67108873</snmp_oid>
+                    <key>tempe.huwaei</key>
+                    <delay>60s</delay>
+                    <units>C</units>
+                    <applications>
+                        <application>
+                            <name>Temperatura</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <name>SNMP availability</name>
+                    <type>INTERNAL</type>
+                    <key>zabbix[host,snmp,available]</key>
+                    <delay>30m</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <applications>
+                        <application>
+                            <name>Status</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>zabbix.host.available</name>
+                    </valuemap>
+                    <triggers>
+                        <trigger>
+                            <expression>{last(30m)}=0</expression>
+                            <name>Unavailable Snmp</name>
+                            <priority>INFO</priority>
+                            <tags>
+                                <tag>
+                                    <tag>Infrastructure</tag>
+                                    <value>Infrastructure</value>
+                                </tag>
+                            </tags>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Network interfaces</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#SNMPVALUE},1.3.6.1.2.1.31.1.1.1.18,{#IFADMINSTATUS},1.3.6.1.2.1.2.2.1.7,{#IFALIAS},1.3.6.1.2.1.31.1.1.1.18,{#IFNAME},1.3.6.1.2.1.31.1.1.1.1,{#IFDESCR},1.3.6.1.2.1.2.2.1.2,{#IFTYPE},1.3.6.1.2.1.2.2.1.3]</snmp_oid>
+                    <key>if-discovery</key>
+                    <delay>1h</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#IFADMINSTATUS}</macro>
+                                <value>1</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#IFNAME}</macro>
+                                <value>(XG|G|100GE|40GE|Eth-Trunk)</value>
+                                <formulaid>B</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>7d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>CRC Error - {#IFNAME}</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.41.1.6.1.1.12.{#SNMPINDEX}</snmp_oid>
+                            <key>hwIfEtherStatInCRCPkts[{#SNMPINDEX}]</key>
+                            <delay>10m</delay>
+                            <description>Erros físicos na interface.</description>
+                            <applications>
+                                <application>
+                                    <name>Network</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{avg(15m)}&gt;10</expression>
+                                    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                                    <recovery_expression>{last()}&lt;2</recovery_expression>
+                                    <name>CRC ERROR &quot; {#IFALIAS}  &quot;</name>
+                                    <status>DISABLED</status>
+                                    <priority>WARNING</priority>
+                                    <tags>
+                                        <tag>
+                                            <tag>uplink</tag>
+                                        </tag>
+                                    </tags>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Admin status - {#IFNAME}</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>IF-MIB::ifAdminStatus.{#SNMPINDEX}</snmp_oid>
+                            <key>ifAdminStatus[{#IFNAME}]</key>
+                            <delay>5m</delay>
+                            <history>1w</history>
+                            <trends>0</trends>
+                            <applications>
+                                <application>
+                                    <name>Network</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>SNMP interface status (ifAdminStatus)</name>
+                            </valuemap>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Alias - {#IFNAME}</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>IF-MIB::ifAlias.{#SNMPINDEX}</snmp_oid>
+                            <key>ifAlias[{#IFNAME}]</key>
+                            <delay>1h</delay>
+                            <history>1w</history>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <applications>
+                                <application>
+                                    <name>Network</name>
+                                </application>
+                            </applications>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Description - {#IFNAME}</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>IF-MIB::ifDescr.{#SNMPINDEX}</snmp_oid>
+                            <key>ifDescr[{#IFNAME}]</key>
+                            <delay>1h</delay>
+                            <history>1w</history>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <applications>
+                                <application>
+                                    <name>Network</name>
+                                </application>
+                            </applications>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Incoming traffic - {#IFNAME}</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>IF-MIB::ifHCInOctets.{#SNMPINDEX}</snmp_oid>
+                            <key>ifHCInOctets.[{#IFNAME}]</key>
+                            <delay>3m</delay>
+                            <history>365d</history>
+                            <units>bps</units>
+                            <applications>
+                                <application>
+                                    <name>Network</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>8</params>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Outgoing traffic - {#IFNAME}</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>IF-MIB::ifHCOutOctets.{#SNMPINDEX}</snmp_oid>
+                            <key>ifHCOutOctets[{#IFNAME}]</key>
+                            <delay>3m</delay>
+                            <history>365d</history>
+                            <units>bps</units>
+                            <applications>
+                                <application>
+                                    <name>Network</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>CHANGE_PER_SECOND</type>
+                                    <params/>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>8</params>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Name - {#IFNAME}</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>IF-MIB::ifName.{#SNMPINDEX}</snmp_oid>
+                            <key>ifName[{#IFNAME}]</key>
+                            <delay>1h</delay>
+                            <history>1w</history>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <applications>
+                                <application>
+                                    <name>Network</name>
+                                </application>
+                            </applications>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Operational status - {#IFNAME}</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>IF-MIB::ifOperStatus.{#SNMPINDEX}</snmp_oid>
+                            <key>ifOperStatus[{#IFNAME}]</key>
+                            <applications>
+                                <application>
+                                    <name>Network</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>SNMP interface status (ifOperStatus)</name>
+                            </valuemap>
+                            <request_method>POST</request_method>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=2</expression>
+                                    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                                    <recovery_expression>{last()}=1</recovery_expression>
+                                    <name>FALHA NA INTERFACE &quot; {#IFALIAS}  &quot;</name>
+                                    <status>DISABLED</status>
+                                    <priority>HIGH</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Speed - {#IFNAME}</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.2.1.31.1.1.1.15.{#SNMPINDEX}</snmp_oid>
+                            <key>net.if.speed[ifHighSpeed.{#SNMPINDEX}]</key>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <applications>
+                                <application>
+                                    <name>Network</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>1000000</params>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{SinalBR - Huawei:ifHCInOctets.[{#IFNAME}].avg(15m)}&gt;({$IF_UTIL_MAX:&quot;{#IFNAME}&quot;}/100)*{SinalBR - Huawei:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()} or &#13;
+({SinalBR - Huawei:ifHCOutOctets[{#IFNAME}].avg(15m)}&gt;({$IF_UTIL_MAX:&quot;{#IFNAME}&quot;}/100)*{SinalBR - Huawei:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()})</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>{SinalBR - Huawei:ifHCInOctets.[{#IFNAME}].avg(15m)}&lt;({$IF_UTIL_MD:&quot;{#IFNAME}&quot;}/100)*{SinalBR - Huawei:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()}&#13;
+and&#13;
+{SinalBR - Huawei:ifHCOutOctets[{#IFNAME}].avg(15m)}&lt;({$IF_UTIL_MD:&quot;{#IFNAME}&quot;}/100)*{SinalBR - Huawei:net.if.speed[ifHighSpeed.{#SNMPINDEX}].last()}</recovery_expression>
+                            <name>INTERFACE &quot;{#IFALIAS}&quot;: TRAFEGO ACIMA DE {$IF_UTIL_MAX: &quot;{#IFNAME}&quot;}%</name>
+                            <status>DISABLED</status>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>FALHA NA INTERFACE &quot; {#IFALIAS}  &quot;</name>
+                                    <expression>{SinalBR - Huawei:ifOperStatus[{#IFNAME}].last()}=2</expression>
+                                    <recovery_expression>{SinalBR - Huawei:ifOperStatus[{#IFNAME}].last()}=1</recovery_expression>
+                                </dependency>
+                            </dependencies>
+                            <tags>
+                                <tag>
+                                    <tag>uplink</tag>
+                                </tag>
+                            </tags>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>Interface - {#IFALIAS}</name>
+                            <graph_items>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>1A7C11</color>
+                                    <item>
+                                        <host>SinalBR - Huawei</host>
+                                        <key>ifHCInOctets.[{#IFNAME}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>2774A4</color>
+                                    <item>
+                                        <host>SinalBR - Huawei</host>
+                                        <key>ifHCOutOctets[{#IFNAME}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>3</sortorder>
+                                    <color>FF0000</color>
+                                    <item>
+                                        <host>SinalBR - Huawei</host>
+                                        <key>hwIfEtherStatInCRCPkts[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                    <request_method>POST</request_method>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Network Interfaces Discovery Optical SL</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#ENTPHYSICALCLASS},1.3.6.1.2.1.47.1.1.1.1.5,{#IFPRESENT},.1.3.6.1.4.1.2011.5.25.31.1.1.3.1.14,{#ENTPHYSICALNAME},1.3.6.1.2.1.47.1.1.1.1.7]</snmp_oid>
+                    <key>net.if.discovery.optical</key>
+                    <delay>1h</delay>
+                    <filter>
+                        <evaltype>AND</evaltype>
+                        <conditions>
+                            <condition>
+                                <macro>{#ENTPHYSICALNAME}</macro>
+                                <value>(XG)</value>
+                                <formulaid>B</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#ENTPHYSICALCLASS}</macro>
+                                <value>(10)</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#IFPRESENT}</macro>
+                                <value>(-1)</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>C</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>7d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: RxPower</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.3.1.32.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalRxPower[{#ENTPHYSICALNAME}]</key>
+                            <delay>30m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>dBm</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface SL: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.01</params>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>({change()}&lt;={$ATTENUATIONFACTOR})&#13;
+&#13;
+&#13;
+and &#13;
+&#13;
+&#13;
+({last()}&lt;&gt;-40)</expression>
+                                    <name>ATENUACAO DE SINAL INTERFACE: {#ENTPHYSICALNAME}</name>
+                                    <status>DISABLED</status>
+                                    <priority>HIGH</priority>
+                                    <manual_close>YES</manual_close>
+                                    <tags>
+                                        <tag>
+                                            <tag>optico</tag>
+                                            <value>optico</value>
+                                        </tag>
+                                    </tags>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: Temperature</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.3.1.5.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalTemperature[{#ENTPHYSICALNAME}]</key>
+                            <delay>30m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <status>DISABLED</status>
+                            <discover>NO_DISCOVER</discover>
+                            <units>°C</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface SL: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: TxPower</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.3.1.33.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalTxPower[{#ENTPHYSICALNAME}]</key>
+                            <delay>30m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <status>DISABLED</status>
+                            <discover>NO_DISCOVER</discover>
+                            <value_type>FLOAT</value_type>
+                            <units>dBm</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface SL: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.01</params>
+                                </step>
+                            </preprocessing>
+                            <request_method>POST</request_method>
+                        </item_prototype>
+                    </item_prototypes>
+                    <request_method>POST</request_method>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Network Interfaces Discovery Optical ML</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#ENTPHYSICALCLASS},1.3.6.1.2.1.47.1.1.1.1.5,{#IFPRESENT},.1.3.6.1.4.1.2011.5.25.31.1.1.3.1.14,{#ENTPHYSICALNAME},1.3.6.1.2.1.47.1.1.1.1.7]</snmp_oid>
+                    <key>net.ml.discovery.optical</key>
+                    <delay>1h</delay>
+                    <filter>
+                        <evaltype>AND</evaltype>
+                        <conditions>
+                            <condition>
+                                <macro>{#ENTPHYSICALNAME}</macro>
+                                <value>(40GE|100GE)</value>
+                                <formulaid>B</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#ENTPHYSICALCLASS}</macro>
+                                <value>(10)</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <lifetime>7d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: RxPower Lane0</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.3.1.32.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalLaneRxPowerMLLane0[{#ENTPHYSICALNAME}]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>dBm</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface ML: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>REGEX</type>
+                                    <params>([^\,\s]*),([^\,\s]*),([^,\s]*),([^,\s]*)
+\1</params>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.01</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: RxPower Lane1</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.3.1.32.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalLaneRxPowerMLLane1[{#ENTPHYSICALNAME}]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>dBm</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface ML: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>REGEX</type>
+                                    <params>([^\,\s]*),([^\,\s]*),([^,\s]*),([^,\s]*)
+\2</params>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.01</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: RxPower Lane2</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.3.1.32.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalLaneRxPowerMLLane2[{#ENTPHYSICALNAME}]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>dBm</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface ML: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>REGEX</type>
+                                    <params>([^\,\s]*),([^\,\s]*),([^,\s]*),([^,\s]*)
+\3</params>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.01</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: RxPower Lane3</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.3.1.32.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalLaneRxPowerMLLane3[{#ENTPHYSICALNAME}]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>dBm</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface ML: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>REGEX</type>
+                                    <params>([^\,\s]*),([^\,\s]*),([^,\s]*),([^,\s]*)
+\4</params>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.01</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: TxPower Lane0</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.3.1.33.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalLaneTxPowerMLLane0[{#ENTPHYSICALNAME}]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>dBm</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface ML: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>REGEX</type>
+                                    <params>([^\,\s]*),([^\,\s]*),([^,\s]*),([^,\s]*)
+\1</params>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.01</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: TxPower Lane1</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.3.1.33.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalLaneTxPowerMLLane1[{#ENTPHYSICALNAME}]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>dBm</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface ML: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>REGEX</type>
+                                    <params>([^\,\s]*),([^\,\s]*),([^,\s]*),([^,\s]*)
+\2</params>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.01</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: TxPower Lane2</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.3.1.33.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalLaneTxPowerMLLane2[{#ENTPHYSICALNAME}]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>dBm</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface ML: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>REGEX</type>
+                                    <params>([^\,\s]*),([^\,\s]*),([^,\s]*),([^,\s]*)
+\3</params>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.01</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: TxPower Lane3</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.31.1.1.3.1.33.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalLaneTxPowerMLLane3[{#ENTPHYSICALNAME}]</key>
+                            <delay>5m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>dBm</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface ML: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <preprocessing>
+                                <step>
+                                    <type>REGEX</type>
+                                    <params>([^\,\s]*),([^\,\s]*),([^,\s]*),([^,\s]*)
+\4</params>
+                                </step>
+                                <step>
+                                    <type>MULTIPLIER</type>
+                                    <params>0.01</params>
+                                </step>
+                            </preprocessing>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Optical Module Interface {#ENTPHYSICALNAME}: Temperature</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>.1.3.6.1.4.1.2011.5.25.31.1.1.3.1.5.{#SNMPINDEX}</snmp_oid>
+                            <key>hwEntityOpticalTemperatureML[{#ENTPHYSICALNAME}]</key>
+                            <delay>30m</delay>
+                            <history>30d</history>
+                            <trends>30d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>°C</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Tranceiver Data Interface ML: [{#ENTPHYSICALNAME}]</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>(({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane0[{#ENTPHYSICALNAME}].change()}&lt;={$ATTENUATIONFACTOR})&#13;
+or&#13;
+({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane1[{#ENTPHYSICALNAME}].change()}&lt;={$ATTENUATIONFACTOR})&#13;
+or&#13;
+({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane2[{#ENTPHYSICALNAME}].change()}&lt;={$ATTENUATIONFACTOR})&#13;
+or&#13;
+({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane3[{#ENTPHYSICALNAME}].change()}&lt;={$ATTENUATIONFACTOR}))&#13;
+&#13;
+and&#13;
+&#13;
+(({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane0[{#ENTPHYSICALNAME}].last()}&lt;&gt;-40)&#13;
+or&#13;
+({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane1[{#ENTPHYSICALNAME}].last()}&lt;&gt;-40)&#13;
+or&#13;
+({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane2[{#ENTPHYSICALNAME}].last()}&lt;&gt;-40)&#13;
+or&#13;
+({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane3[{#ENTPHYSICALNAME}].last()}&lt;&gt;-40))</expression>
+                            <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                            <recovery_expression>(({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane0[{#ENTPHYSICALNAME}].change(30m)}&gt;={$ATTENUATIONFACTOR})&#13;
+or&#13;
+({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane1[{#ENTPHYSICALNAME}].change(30m)}&gt;={$ATTENUATIONFACTOR})&#13;
+or&#13;
+({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane2[{#ENTPHYSICALNAME}].change(30m)}&gt;={$ATTENUATIONFACTOR})&#13;
+or&#13;
+({SinalBR - Huawei:hwEntityOpticalLaneRxPowerMLLane3[{#ENTPHYSICALNAME}].change(30m)}&gt;={$ATTENUATIONFACTOR}))</recovery_expression>
+                            <name>Signal Atenuation on Optical Module ML: {#ENTPHYSICALNAME}</name>
+                            <status>DISABLED</status>
+                            <priority>HIGH</priority>
+                            <manual_close>YES</manual_close>
+                            <tags>
+                                <tag>
+                                    <tag>optico</tag>
+                                    <value>optico</value>
+                                </tag>
+                            </tags>
+                        </trigger_prototype>
+                    </trigger_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Tunel Discovery</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#SNMPVALUE},.1.3.6.1.4.1.2011.5.25.119.4.1.1.1.1.49]</snmp_oid>
+                    <key>tunel.discovery</key>
+                    <delay>1h</delay>
+                    <lifetime>1d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Tunel L2vc {#SNMPVALUE}</name>
+                            <type>SNMP_AGENT</type>
+                            <snmp_oid>1.3.6.1.4.1.2011.5.25.119.4.1.1.1.1.5.{#SNMPINDEX}</snmp_oid>
+                            <key>hwPWVcStatus.[{#SNMPINDEX}]</key>
+                            <delay>5m</delay>
+                            <applications>
+                                <application>
+                                    <name>Mpls Tunel</name>
+                                </application>
+                            </applications>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Mpls Tunel</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=2</expression>
+                                    <recovery_mode>RECOVERY_EXPRESSION</recovery_mode>
+                                    <recovery_expression>{last()}&lt;&gt;2</recovery_expression>
+                                    <name>Tunel L2vc {#SNMPVALUE} Down</name>
+                                    <status>DISABLED</status>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$ATTENUATIONFACTOR}</macro>
+                    <value>-2</value>
+                </macro>
+                <macro>
+                    <macro>{$IF_UTIL_LOW}</macro>
+                    <value>2</value>
+                </macro>
+                <macro>
+                    <macro>{$IF_UTIL_MAX}</macro>
+                    <value>80</value>
+                </macro>
+                <macro>
+                    <macro>{$IF_UTIL_MD}</macro>
+                    <value>70</value>
+                </macro>
+                <macro>
+                    <macro>{$SNMP_COMMUNITY}</macro>
+                    <value>SINALBR_01</value>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>Memory</name>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>C80000</color>
+                    <item>
+                        <host>SinalBR - Huawei</host>
+                        <key>memory.usage</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Temperatura</name>
+            <graph_items>
+                <graph_item>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>SinalBR - Huawei</host>
+                        <key>tempe.huwaei</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Uptime</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>BOLD_LINE</drawtype>
+                    <color>00AA00</color>
+                    <item>
+                        <host>SinalBR - Huawei</host>
+                        <key>sysUpTime</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+    <value_maps>
+        <value_map>
+            <name>SNMP interface status (ifAdminStatus)</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>up</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>down</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>testing</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>SNMP interface status (ifOperStatus)</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>up</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>down</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>testing</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>unknown</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>dormant</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>notPresent</newvalue>
+                </mapping>
+                <mapping>
+                    <value>7</value>
+                    <newvalue>lowerLayerDown</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>zabbix.host.available</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>not available</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>available</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>unknown</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>
