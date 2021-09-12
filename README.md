@@ -6,15 +6,6 @@
 4. Link the template to the target host. From there on Zabbix Server or Proxy will discover and monitor the hops between itself and the target's HOST IP using the {HOST.IP} macro.
 
 
-
-## Template Status
-
-
-1. Imcp Check.
-2. Snmp Check.
-3. Uptime.
-
-
 ## Template Ubiquiti
 
 
