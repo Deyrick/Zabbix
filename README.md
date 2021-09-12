@@ -60,10 +60,14 @@
 
 Add "Valuemaps" on zabbix
 
-
 ## Template Huawei 
 
-
+1. CPU and Memory 
+2. Temperature 
+3. Inventory
+4. Power Supply
+5. Network Interfaces
+6. Optical Modules SL/ML
 
 
 
